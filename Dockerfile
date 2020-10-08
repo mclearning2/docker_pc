@@ -29,7 +29,10 @@ COPY .p10k.zsh $HOME
 # ZSH Plugins
 RUN git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+RUN git clone git://github.com/wting/autojump.git && cd autojump && SHELL="zsh" ./install.py
 RUN git clone https://github.com/supercrabtree/k ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/k
+RUN echo "[[ -s /home/kmc/.autojump/etc/profile.d/autojump.sh ]] && source /home/kmc/.autojump/etc/profile.d/autojump.sh" >> $HOME/.zshrc
+RUN echo "autoload -U compinit && compinit -u" >> $HOME/.zshrc
 RUN echo "source ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
 
 RUN sed -i 's/plugins=(git)/plugins=(git vi-mode zsh-autosuggestions k)/g' $HOME/.zshrc
@@ -38,7 +41,6 @@ RUN sed -i 's/plugins=(git)/plugins=(git vi-mode zsh-autosuggestions k)/g' $HOME
 # 여기 이후에는 이상하게 zsh가 써지지 않는다.
 RUN git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
 RUN $HOME/.fzf/install
-
 
 USER $USER_ID
 WORKDIR $HOME
