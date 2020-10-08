@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  basic:
+    image: mclearning2/pc:basic
+    build:
+      context: .
+      dockerfile: Dockerfile
+    tty: true
+    stdin_open: true
+    container_name: devel-basi
+
+  django:
+    image: mclearning2/pc:django
+    build:
+      context: .
+      dockerfile: Django.Dockerfile
+    tty: true
+    stdin_open: true
+    container_name: devel-django
