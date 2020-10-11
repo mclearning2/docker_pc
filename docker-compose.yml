@@ -8,7 +8,7 @@ services:
       dockerfile: Dockerfile
     tty: true
     stdin_open: true
-    container_name: devel-basi
+    container_name: devel-basic
 
   django:
     image: mclearning2/pc:django
