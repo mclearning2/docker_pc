@@ -6,15 +6,16 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    tty: true
-    stdin_open: true
-    container_name: devel-basic
+      args:
+          USER: ${USER}
+          HOME: ${HOME}
 
-  django:
-    image: mclearning2/pc:django
-    build:
-      context: .
-      dockerfile: Django.Dockerfile
     tty: true
     stdin_open: true
-    container_name: devel-django
+
+    container_name: devel-basic
+    command: /bin/zsh
+    env_file: 
+        - .env
+    volumes:
+        - ~/.ssh:/home/${USER}/.ssh:ro
