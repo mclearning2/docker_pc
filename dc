@@ -1,0 +1,11 @@
+if [ $1 = "b" ]
+    then
+        shift;
+        docker-compose build $@
+elif [ $1 = "r" ]
+    then
+        shift;
+        docker-compose run $@
+else
+    docker-compose $@
+fi
