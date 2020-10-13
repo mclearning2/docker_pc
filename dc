@@ -1,11 +1,23 @@
+con_name=mc-devel
+
 if [ $1 = "b" ]
     then
         shift;
         docker-compose build $@
+elif [ $1 = "e" ]
+    then
+        shift;
+        docker-compose exec $@ /bin/zsh
+elif [ $1 = "u" ]
+    then
+        shift;
+        docker-compose up -d $@
 elif [ $1 = "r" ]
     then
         shift;
-        docker-compose run $@
+        docker kill $con_name >> /dev/null 2>&1
+        docker rm $con_name >> /dev/null 2>&1
+        docker-compose run --name $con_name $@ /bin/zsh
 else
     docker-compose $@
 fi

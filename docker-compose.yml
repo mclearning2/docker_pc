@@ -9,12 +9,10 @@ services:
       args:
           USER: ${USER}
           HOME: ${HOME}
-
+    container_name: devel-basic
     tty: true
     stdin_open: true
-
-    container_name: devel-basic
-    command: /bin/zsh
+    network_mode: "host"
     env_file: 
         - .env
     volumes:

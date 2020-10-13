@@ -14,7 +14,6 @@ set shiftwidth=4                " 자동 들여쓰기 4칸
 set smarttab 					" ts, sts, sw 값을 참조하여, 탭과 백스페이스의 동작 보조
 set expandtab 					" Tab을 space로 변환
 set wrap        
-set nobackup					" 백업 파일 만들지 않음
 set nu							" Line number
 set ruler                       " 현재 커서 위치의 줄번호와 행번호 출력한다.
 set history=1000				" vi 편집기록 기억갯수 .viminfo에 기록
@@ -22,7 +21,6 @@ set autoindent					" 자동 들여쓰기
 set cindent						" C 프로그래밍용 자동 들여쓰기
 set smartindent					" 
 set backspace=indent,eol,start  " allow backspacing over everything in insert mode
-set nobackup                    " backup 파일 만들지 않음
 set noswapfile
 set title                       " change the terminal's title
 set laststatus=2                " Status 출력 (0: 출력 안함, 1: 창이 2개이상일 때 출력, 2: 항상출력)
@@ -41,10 +39,6 @@ set nowrapscan " 검색할 때 문서의 끝에서 처음으로 안 돌아감
 " https://rampart81.github.io/post/vim-clipboard-share/
 set clipboard=unnamedplus
 set mouse=a                     " vim에서 마우스 사용
-
-" Cursur shape in vim mode
-let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
-let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
 
 " 인코딩 파일을 수동으로 설정
 set fileencodings=utf8,euc-kr
@@ -84,8 +78,8 @@ filetype plugin indent on
 "" YCM
 "let g:ycm_autoclose_preview_window_after_completion=1
 nnoremap <C-g> :YcmCompleter GoToDefinitionElseDeclaration<CR>
-let g:ycm_key_list_select_completion = ['j']
-let g:ycm_key_list_previous_completion=['k']
+let g:ycm_key_list_select_completion = ['C-n']
+let g:ycm_key_list_previous_completion=['C-p']
 
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
@@ -121,4 +115,3 @@ autocmd BufWritePre *.py execute ':Isort'
 
 "" FZF with vim
 nnoremap <silent> <C-f> :FZF<CR>
-colorscheme dracula

@@ -12,10 +12,12 @@ RUN apt-get update && \
                        vim \
                        vim-gtk \
                        ripgrep \
+                       fd-find \
                        xclip \
                        sudo \
                        build-essential \
                        wget \
+                       python \
                        python3 \
                        python3-dev \
                        python3-pip \
@@ -79,9 +81,8 @@ RUN sudo chsh -s `which zsh`
 # ==================================================================================================
 RUN git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
 RUN $HOME/.fzf/install
-RUN echo "INITIAL_QUERY=\"\"" >> $HOME/.zshrc
-RUN echo "RG_PREFIX=\"rg --column --line-number --no-heading --color=always --smart-case \"" >> $HOME/.zshrc
-RUN echo "FZF_DEFAULT_COMMAND=\"$RG_PREFIX '$INITIAL_QUERY'\" fzf --bind \"change:reload:$RG_PREFIX {q} || true\" --ansi --phony --query \"$INITIAL_QUERY\" --height=50% --layout=reverse" >> $HOME/.zshrc
+RUN echo "export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'" >> $HOME/.zshrc
+RUN echo "export FZF_DEFAULT_OPT='fd --type f --hidden --follow --exclude .git'" >> $HOME/.zshrc
 # ==================================================================================================
 
 # 한글 사용
