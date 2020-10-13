@@ -121,3 +121,4 @@ autocmd BufWritePre *.py execute ':Isort'
 
 "" FZF with vim
 nnoremap <silent> <C-f> :FZF<CR>
+colorscheme dracula

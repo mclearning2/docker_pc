@@ -16,14 +16,13 @@ RUN apt-get update && \
                        sudo \
                        build-essential \
                        wget \
-                       python \
                        python3 \
                        python3-dev \
                        python3-pip \
                        python3-venv \
                        cmake \
                        npm \
-                       inxi screenfetch ansiweather # MOTD
+                       inxi screenfetch # MOTD
 
 # Oh my zsh
 # ==================================================================================================
