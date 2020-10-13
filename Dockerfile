@@ -11,6 +11,7 @@ RUN apt-get update && \
                        git \ 
                        vim \
                        vim-gtk \
+                       ripgrep \
                        xclip \
                        sudo \
                        build-essential \
@@ -79,10 +80,9 @@ RUN sudo chsh -s `which zsh`
 # ==================================================================================================
 RUN git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
 RUN $HOME/.fzf/install
-RUN echo "if type rg &> /dev/null; then" >> $HOME/.zshrc
-RUN echo "  export FZF_DEFAULT_COMMAND='rg --files'"  >> $HOME/.zshrc
-RUN echo "  export FZF_DEFAULT_OPTS='-m --height 50% --border'"  >> $HOME/.zshrc
-RUN echo "fi" >> $HOME/.zshrc
+RUN echo "INITIAL_QUERY=\"\"" >> $HOME/.zshrc
+RUN echo "RG_PREFIX=\"rg --column --line-number --no-heading --color=always --smart-case \"" >> $HOME/.zshrc
+RUN echo "FZF_DEFAULT_COMMAND=\"$RG_PREFIX '$INITIAL_QUERY'\" fzf --bind \"change:reload:$RG_PREFIX {q} || true\" --ansi --phony --query \"$INITIAL_QUERY\" --height=50% --layout=reverse" >> $HOME/.zshrc
 # ==================================================================================================
 
 # 한글 사용
