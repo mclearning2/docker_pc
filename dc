@@ -4,10 +4,9 @@ if [ $1 = "b" ]
     then
         shift;
         docker-compose build $@
-elif [ $1 = "e" ]
+elif [ $1 = "a" ]
     then
-        shift;
-        docker-compose exec $@ /bin/zsh
+        docker attach $con_name
 elif [ $1 = "u" ]
     then
         shift;

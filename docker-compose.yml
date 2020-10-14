@@ -1,19 +1,31 @@
 version: "3"
 
 services:
-  basic:
-    image: mclearning2/pc:basic
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-          USER: ${USER}
-          HOME: ${HOME}
-    container_name: devel-basic
-    tty: true
-    stdin_open: true
-    network_mode: "host"
-    env_file: 
-        - .env
-    volumes:
-        - ~/.ssh:/home/${USER}/.ssh:ro
+    basic:
+        image: mclearning2/pc:basic
+        build:
+            context: .
+            dockerfile: Dockerfile
+            args:
+                USER: ${USER}
+                HOME: ${HOME}
+        container_name: devel-basic
+        tty: true
+        stdin_open: true
+        network_mode: "host"
+        env_file: 
+            - .env
+        volumes:
+            - ~/.ssh:/home/${USER}/.ssh:ro
+
+    django:
+        image: mclearning2/pc:django    
+        build:
+            context: django_ctx
+            dockerfile: Dockerfile
+        container_name: devel-django
+        tty: true
+        stdin_open: true
+        network_mode: "host"
+        volumes:
+            - ~/.ssh:/home/${USER}/.ssh:ro

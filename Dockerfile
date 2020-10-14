@@ -26,6 +26,8 @@ RUN apt-get update && \
                        npm \
                        inxi screenfetch # MOTD
 
+RUN sudo npm install -g sass
+
 # Oh my zsh
 # ==================================================================================================
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
