@@ -10,13 +10,13 @@ elif [ $1 = "a" ]
 elif [ $1 = "u" ]
     then
         shift;
-        docker-compose up -d $@
+        docker-compose up $@
 elif [ $1 = "r" ]
     then
         shift;
         docker kill $con_name >> /dev/null 2>&1
         docker rm $con_name >> /dev/null 2>&1
-        docker-compose run --name $con_name $@ /bin/zsh
+        docker-compose run --name $con_name $@
 else
     docker-compose $@
 fi

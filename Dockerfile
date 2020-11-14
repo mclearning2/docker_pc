@@ -17,6 +17,8 @@ RUN apt-get update && \
                        sudo \
                        build-essential \
                        wget \
+                       net-tools \
+                       openssh-server \
                        python \
                        python3 \
                        python3-dev \
@@ -100,6 +102,13 @@ RUN usermod -aG sudo ${USER}
 RUN chown -R $USER $HOME
 # ==================================================================================================
 
+RUN echo "alias ls=\"k\"" >> $HOME/.zshrc
+
+# ssh server
+# ===
+RUN service ssh start
+# ===
+
 USER $USER
 
 ARG WORKSPACE=/workspace
@@ -109,3 +118,5 @@ RUN sudo chown kmc:kmc ${WORKSPACE}
 RUN sudo chmod 755 $WORKSPACE
 
 WORKDIR $WORKSPACE
+
+ENTRYPOINT sudo service ssh restart && zsh

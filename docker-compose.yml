@@ -12,20 +12,10 @@ services:
         container_name: devel-basic
         tty: true
         stdin_open: true
-        network_mode: "host"
         env_file: 
             - .env
         volumes:
             - ~/.ssh:/home/${USER}/.ssh:ro
-
-    django:
-        image: mclearning2/pc:django    
-        build:
-            context: django_ctx
-            dockerfile: Dockerfile
-        container_name: devel-django
-        tty: true
-        stdin_open: true
-        network_mode: "host"
-        volumes:
-            - ~/.ssh:/home/${USER}/.ssh:ro
+            - /home/kmc:/workspace
+        ports:
+            - "10022:22"
